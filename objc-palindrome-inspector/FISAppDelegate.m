@@ -15,38 +15,36 @@
  * Implement your methods here.
  
  */
-
-
-
-- (BOOL)stringIsPalindrome:(NSString *)string
-{
-    NSArray *punctuations = @[ @"!", @",", @".", @"?" ];
+- (BOOL)stringIsPalindrome:( NSString * )string {
+    
+    NSArray *punctuations = @[ @"!", @",", @".", @"%%", @"?", @"" ] ;
     NSString *noPunctuation = [ string copy ];
     
-    for ( NSUInteger i = 0; i < [ punctuations count ]; i ++ ) {
-        NSString *punctuation = punctuations[i];
-        noPunctuation = [noPunctuation stringByReplacingOccurrencesOfString:punctuation withString:@""];
-    
+    for ( NSUInteger i = 0 ; i < [ punctuations count ] ; i ++ ) {
+        NSString *punctuation = punctuations[i] ;
+        noPunctuation = [ noPunctuation stringByReplacingOccurrencesOfString:punctuation withString:@""];
     }
-    NSString *spaceless = [ noPunctuation stringByReplacingOccurrencesOfString:@" " withString:@"" ];
-    NSString *lowercase= [ spaceless lowercaseString ];
-    NSString *reverse = [ self stringByReversingString:lowercase ];
-    NSLog( @"%@ : %@", string, reverse );
-    BOOL stringIsEqualToReverse = [ lowercase isEqualToString:reverse ];
     
-    return stringIsEqualToReverse;
+    NSString *noSpace = [ noPunctuation stringByReplacingOccurrencesOfString:@" " withString: @"" ] ;
+    NSString *lowercase = [ noSpace lowercaseString ] ;
+    NSString *reverse = [ self stringByReversingString:lowercase ] ;
     
+    BOOL isPalindrome = [ reverse isEqualToString:lowercase ] ;
+    
+    NSLog( @"%d %@ : %@", isPalindrome, reverse, string ) ;
+    return isPalindrome;
 }
-- (NSString *)stringByReversingString:(NSString *)string {
+
+- ( NSString * )stringByReversingString:( NSString * )string {
     
-    NSString *result = @"";
+    NSString *result = @"" ;
     
-    for (NSUInteger i = [string length]; i > 0; i--) {
-        NSUInteger index = i - 1;
-        unichar c = [string characterAtIndex:index];
-        result = [result stringByAppendingFormat:@"%c", c];
+    for ( NSUInteger i = [ string length ]; i >0; i-- ) {
+        NSUInteger index = i - 1 ;
+        unichar c = [ string characterAtIndex:index ] ;
+        result = [ result stringByAppendingFormat:@"%c", c ] ;
     }
-    return result;
+    return result ;
 }
 
 @end
